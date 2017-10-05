@@ -1,4 +1,5 @@
 app.controller('uploadfood', ['$scope', '$http', '$state', '$interval', '$mdDialog', '$mdSidenav', 'ShamayimFunctions', '$rootScope', function ($scope, $http, $state, $interval, $mdDialog, $mdSidenav, ShamayimFunctions, $rootScope) {
+    $rootScope.isLogin = true;
     $scope.files;
     $scope.strCaptionDragAndDrop = "Drag & drop files here...";
     // Just print kind of 'hay message'
@@ -58,20 +59,21 @@ app.controller('uploadfood', ['$scope', '$http', '$state', '$interval', '$mdDial
         var sellerId = -1;
         $http.get('/GET_USER_ID/' + $scope.userName).then(function (result) {
             sellerId = result.data;
-        }, function (err) {
-            //alert(err);
-        });
-        $scope.productToUpload.sellerId = sellerId;
+            $scope.productToUpload.sellerId = sellerId;
 
-        formData.append('ProductToUpload', JSON.stringify($scope.productToUpload));
-        $http.post('/INSERT_PRODUCT', formData, {
-            transformRequest: angular.identity,
-            headers: {'Content-Type': undefined}
-        }).then(function (result) {
-            //alert(result);
+            formData.append('ProductToUpload', JSON.stringify($scope.productToUpload));
+            $http.post('/INSERT_PRODUCT', formData, {
+                transformRequest: angular.identity,
+                headers: {'Content-Type': undefined}
+            }).then(function (result) {
+                //alert(result);
+            }, function (err) {
+                //alert(err);
+            });
         }, function (err) {
             //alert(err);
         });
+
 
     }
 

@@ -1,5 +1,6 @@
 app.controller('index', ['$scope', '$http', '$filter', '$state', '$mdDialog', '$mdSidenav', function ($scope, $http, $filter, $state, $mdDialog, $mdSidenav) {
 
+    $scope.isLogin = false;
     $scope.isManager = function () {
             if (ShamayimFunctions.getPermissionCookie() == "0") {
                 return true;

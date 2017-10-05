@@ -1,5 +1,6 @@
 app.controller('house', ['$scope', '$http', '$state', '$interval', '$mdDialog', '$mdSidenav', 'ShamayimFunctions', '$rootScope', function ($scope, $http, $state, $interval, $mdDialog, $mdSidenav, ShamayimFunctions, $rootScope) {
 
+    $rootScope.isLogin = true;
     ShamayimFunctions.setIsLoggedCookie("true");
     $scope.houseWasLoaded = false;
     $scope.backToButton = "בחר בית";

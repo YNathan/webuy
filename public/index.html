@@ -85,7 +85,7 @@
 </md-toolbar>
 <br>
 <br><br><br>
-<div layout="row" layout-xs="column">
+<div layout="row" layout-xs="column" ng-if="!isLogin">
     <div flex="20">
         version:
         <br>
@@ -102,7 +102,7 @@
 
     <!--div flex id="map" style="max-height: 300px; max-width: 200px;border-radius: 10px 10px 0 0;"></div-->
 </div>
-<div layout="row" layout-xs="column">
+<div layout="row" layout-xs="column" ng-if="!isLogin">
     <div flex="20">
         <p><b>Shoes</b></p><br>
         <p><b>Belt</b></p><br>
@@ -448,21 +448,6 @@
             </center>
         </md-toolbar>
         <md-content layout-margin="" align="center" style="background-color: #DDDDDD;">
-            <md-button class="house" ng-click="goToHouse()">
-                <md-icon md-svg-icon="home"></md-icon>
-                <div>{{dictionary.Dictionary[0].House}}</div>
-            </md-button>
-            </br>
-            <md-button class="houses" ng-click="goToHouses()">
-                <md-icon md-svg-icon="home"></md-icon>
-                <div> {{dictionary.Dictionary[0].ManageHouses}}</div>
-            </md-button>
-            </br>
-            <md-button ng-if="isManager()" class="NewHouse" ng-click="goToNewHouse()">
-                <md-icon md-svg-icon="home"></md-icon>
-                <div>{{dictionary.Dictionary[0].NewHouse}}</div>
-            </md-button>
-            </br>
             <md-button ng-if="isManager()" class="NewHouse" ng-click="goToUploadFood()">
                 <md-icon md-svg-icon="home"></md-icon>
                 <div>upload food</div>
@@ -470,7 +455,7 @@
             </br>
             <md-button ng-if="isManager()" class="NewHouse" ng-click="goToSystemManager()">
                 <md-icon md-svg-icon="human"></md-icon>
-                <div>{{dictionary.Dictionary[0].SystemManager}}</div>
+                <div>SystemManager</div>
             </md-button>
             </br>
             <md-button class="copyright" ng-click="Copyright()">
