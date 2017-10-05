@@ -1,0 +1,46 @@
+<md-content class="md-padding"
+            style="background: url('../images/background.jpg');"/><!-- ng-if="!isNewHouseChecked && houseWasChosen"-->
+
+<div layout="row" layout-sm="column" md-colors="{color: 'red-A100', border-color: 'primary-600'}"
+     style="background-color: #DDDDDD;">
+    <center>
+        <form class="md-padding">
+            <md-input-container>
+                <label>nom du product sur le site</label>
+                <input type="text" ng-model="productToUpload.productName" name="text" required/>
+            </md-input-container>
+
+            <md-input-container>
+                <label> company name :</label>
+                <input type="text" ng-model="productToUpload.companyName" name="text" required/>
+            </md-input-container>
+
+            <md-input-container>
+                <label> max price :</label>
+                <input type="text" ng-model="productToUpload.maxPrice" name="text" required/>
+            </md-input-container>
+            <md-input-container>
+                <label> min price :</label>
+                <input type="text" ng-model="productToUpload.minPrice" name="text" required/>
+            </md-input-container>
+
+            <div layout="column" ng-cloak="" class="chipsdemoBasicUsage">
+                <md-content class="md-padding" layout="column">
+                    <h2 class="md-title">Tags</h2>
+                    <md-chips ng-model="productToUpload.tags" md-removable="removable"></md-chips>
+                </md-content>
+            </div>
+        </form>
+
+        <form name="testForm" layout="column" ng-submit="uploadProduct()">
+            <lf-ng-md-file-input name="files" lf-files="files" lf-required lf-mimetype="image/*" multiple drag
+                                 preview></lf-ng-md-file-input>
+            <div ng-messages="testForm.files.$error" style="color:red;">
+            </div>
+            <md-button class="md-raised md-primary" type="submit" id="submit">שמור
+            </md-button>
+        </form>
+    </center>
+
+</div>
+</md-content>
