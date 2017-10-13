@@ -270,4 +270,25 @@ public class getter extends Controller {
         return ok(Json.toJson(product));
     }
 
+
+    /***
+     * Get a all products from server
+     * @return
+     */
+    public static Result getAllProducts() {
+        System.out.println(new SimpleDateFormat("HH:mm:ss").format(Calendar.getInstance().getTime()) + " <GETTER>  in IP : " + request().remoteAddress() + " : Get all products");
+        Logger.debug(new SimpleDateFormat("HH:mm:ss").format(Calendar.getInstance().getTime()) + " <GETTER>  in IP : " + request().remoteAddress() + " : Get all products");
+        return ok(Json.toJson(getterBL.getAllProductsEntities()));
+    }
+
+    /***
+     * Get a all products from server
+     * @return
+     */
+    public static Result getProductsByTag(String tag) {
+        System.out.println(new SimpleDateFormat("HH:mm:ss").format(Calendar.getInstance().getTime()) + " <GETTER>  in IP : " + request().remoteAddress() + " : Get products by tag: " + tag);
+        Logger.debug(new SimpleDateFormat("HH:mm:ss").format(Calendar.getInstance().getTime()) + " <GETTER>  in IP : " + request().remoteAddress() + " : Get products by tag: " + tag);
+        return ok(Json.toJson(getterBL.getProductsByTag(tag)));
+    }
+
 }

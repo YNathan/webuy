@@ -174,7 +174,6 @@ app.controller('house', ['$scope', '$http', '$state', '$interval', '$mdDialog', 
     }
 
 
-
     // Logic methods section
     function getHouse(nHouseId) {
         // Get information conserning the house
@@ -265,7 +264,7 @@ app.controller('house', ['$scope', '$http', '$state', '$interval', '$mdDialog', 
                 });
     }
 
-    $scope.deleteHouse = function(ev,szHouseId) {
+    $scope.deleteHouse = function (ev, szHouseId) {
         // Appending dialog to document.body to cover sidenav in docs app
         var confirm = $mdDialog.confirm()
             .title('Would you like to delete the house?')
@@ -275,7 +274,7 @@ app.controller('house', ['$scope', '$http', '$state', '$interval', '$mdDialog', 
             .ok('I Agree')
             .cancel('I Dont Want');
 
-        $mdDialog.show(confirm).then(function() {
+        $mdDialog.show(confirm).then(function () {
             $http.post("/DELETE_HOUSE/" + ShamayimFunctions.getCookie("username") + "/" + szHouseId)
                 .then(function successCallback(response) {
                         ShamayimFunctions.showAlert("Operation Success", response.data, "");
@@ -283,11 +282,9 @@ app.controller('house', ['$scope', '$http', '$state', '$interval', '$mdDialog', 
                     function error(response) {
                         ShamayimFunctions.showAlert("Your attention please", response.data, "cant delete house");
                     });
-        }, function() {
+        }, function () {
         });
     };
-
-
 
 
     // Language Section
@@ -412,5 +409,19 @@ app.controller('house', ['$scope', '$http', '$state', '$interval', '$mdDialog', 
         $scope.currentPageDocuments = $scope.pagingDocument.current;
         $scope.houseDocument = $scope.houseDocumentsPathes.availableOptions[$scope.currentPageDocuments - 1];
     }
+
+
+    $scope.listOfProductEntitys;
+    // Get information conserning the
+    $http.get("/GET_ALL_PRODUCTS")
+        .then(function successCallback(response) {
+                $scope.listOfProductEntitys = response.data;
+                console.log("lala")
+        },
+        function error(response) {
+            ShamayimFunctions.showAlert("Your attention please", response.data, "cant load products");
+        });
+
+
 }])
 

@@ -402,9 +402,20 @@ public class getterBL {
 
     // Get Specific Picture
     public File getSpecificImages(String szFileName) {
-        String szFullFilePath = System.getenv("FOLIES_PICTS") + "\\" + szFileName;
+        String szFullFilePath = System.getenv("WEBUY_PICTS") + "\\" + szFileName;
         File fileToReturn = fileGetter.getFile(szFullFilePath);
         return fileToReturn;
+    }
+
+    public ArrayList<Product> getAllProductsEntities() {
+        ArrayList<Product> ProductEntitiesToReturn = new ArrayList<>();
+        ProductEntitiesToReturn = getterDB.getAllProducts();
+        return ProductEntitiesToReturn;
+    }
+    public ArrayList<Product> getProductsByTag(String tag) {
+        ArrayList<Product> ProductEntitiesToReturn = new ArrayList<>();
+        ProductEntitiesToReturn = getterDB.getProductsByTag(tag);
+        return ProductEntitiesToReturn;
     }
 
 

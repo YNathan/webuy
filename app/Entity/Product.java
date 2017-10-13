@@ -1,6 +1,9 @@
 package Entity;
 
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Created by jacky on 29/09/2017.
  */
@@ -80,5 +83,23 @@ public class Product {
 
     public void setTags(String[] tags) {
         this.tags = tags;
+    }
+
+    public static String[] setTagsToArray(String tagsBeforeConvertion) {
+        String[] stringsTagBefor = tagsBeforeConvertion.split("}\\{");
+        String[] tagsArrayToReturn = new String[stringsTagBefor.length];
+        int nCounter = 0;
+        for (String currTag : stringsTagBefor) {
+            if (currTag.contains("{")) {
+                tagsArrayToReturn[nCounter] = currTag.replace("{", "");
+            } else if (currTag.contains("}")) {
+                tagsArrayToReturn[nCounter] = currTag.replace("}", "");
+            } else {
+                tagsArrayToReturn[nCounter] = currTag;
+            }
+            System.out.println(tagsArrayToReturn[nCounter]);
+            nCounter++;
+        }
+        return tagsArrayToReturn;
     }
 }

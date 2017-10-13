@@ -1,5 +1,58 @@
 app.controller('welcome', ['$scope', '$http', '$state', '$interval', '$mdDialog', '$mdSidenav', 'ShamayimFunctions', '$rootScope', function ($scope, $http, $state, $interval, $mdDialog, $mdSidenav, ShamayimFunctions, $rootScope) {
 
+    function isInArray(arr, str) {
+        var bool = false;
+        angular.forEach(arr, function (tag, key) {
+            if (angular.equals(tag, str)) {
+                bool = true;
+            }
+        });
+
+        return bool;
+    }
+
+    $scope.listOfProductEntitys;
+    $scope.listOfTags = [];
+    // Get information conserning the
+    $http.get("/GET_ALL_PRODUCTS")
+        .then(function successCallback(response) {
+                $scope.listOfProductEntitys = response.data;
+                angular.forEach($scope.listOfProductEntitys, function (productEntity, key) {
+                    angular.forEach(productEntity.tags, function (tag, key) {
+                        if (!isInArray($scope.listOfTags, tag)) {
+                            $scope.listOfTags.push(tag);
+                            console.log(tag);
+                        }
+                    });
+                });
+            },
+            function error(response) {
+                ShamayimFunctions.showAlert("Your attention please", response.data, "cant load products");
+            });
+
+    $scope.getProductsByTags = function (tagSelected) {
+        // Get all products
+        $http.get("/GET_PRODUCTS_BY_TAG/"+tagSelected)
+            .then(function successCallback(response) {
+                    $scope.listOfProductEntitys = response.data;
+                    angular.forEach($scope.listOfProductEntitys, function (productEntity, key) {
+                        angular.forEach(productEntity.tags, function (tag, key) {
+                            if (!isInArray($scope.listOfTags, tag)) {
+                                $scope.listOfTags.push(tag);
+                                console.log(tag);
+                            }
+                        });
+                    });
+                },
+                function error(response) {
+                    ShamayimFunctions.showAlert("Your attention please", response.data, "cant load products");
+                });
+
+
+    }
+
+
+
     $scope.lala = "poulet roty";
    ShamayimFunctions.setIsLoggedCookie("false");
     // Language Section

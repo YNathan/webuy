@@ -1,0 +1,70 @@
+<div layout="row" layout-xs="column">
+    <div flex="20">
+        <div ng-repeat="tag in listOfTags">
+            <p><b ng-click="getProductsByTags(tag)">{{tag}}</b></p>
+        </div>
+    </div>
+    <div flex="75">
+
+        <div ng-repeat="product in listOfProductEntitys" layout="row">
+            <div flex>
+                <img ng-src=/GET_IMAGE/{{product.productId}}.jpg
+                     class="md-card-image" alt="Washed Out"
+                     style="height: 100px; length: 100px; border-radius: 10px 10px 0 0;">
+            </div>
+            <div flex>
+                <label style="font-weight: bold; font-size: 25px;">{{product.companyName}}</label>
+                <br>
+                <label style="text-align: left; color: grey; font-family: 'Copperplate Gothic Light'; font-size: 20px">
+                    {{product.productName}}</label><br>
+                <md-button
+                        style="text-align: left;background-color: darkslateblue; color: whitesmoke; font-family: 'Copperplate Gothic Light'; font-size: 20px">
+                    Buy Now ${{product.maxPrice}}
+                </md-button>
+            </div>
+            <div flex>
+                68
+                <md-icon md-svg-icon="human"></md-icon>
+                time left:
+                <md-icon md-svg-icon="timer"></md-icon>
+                05:08:04
+                <br><br><br>
+                <md-progress-linear md-mode="determinate" value="68"></md-progress-linear>
+                <br>
+                <label style="text-align: left; color: grey; font-family: 'Copperplate Gothic Light'; font-size: 20px">
+                </label><br>
+
+                <md-button
+                        style="text-align: left;background-color: greenyellow; color: darkslateblue; font-family: 'Copperplate Gothic Light'; font-size: 20px">
+                    We Buy ${{product.minPrice}}
+                </md-button>
+            </div>
+            <hr style="border-top: 1px solid #8c8b8b; border-bottom: 1px solid #fff;">
+        </div>
+    </div>
+
+    <!--div flex id="map" style="max-height: 300px; max-width: 200px;border-radius: 10px 10px 0 0;"></div-->
+</div>
+<div layout="row" style="height: 65%; overflow: auto">
+    <div flex="5"></div>
+    <div flex="90" layout="column">
+        <div layout="row"
+             style="display: flex; flex-wrap: wrap; align-items: flex-start; align-content: flex-start;align-content: flex-start">
+            <div ng-repeat="srcProfileImage in foodProfilePathesImages.availableOptions">
+                <p style="text-align: center; color: black; font-family: 'Copperplate Gothic Light'; font-size: 20px">
+                    {{srcProfileImage.foodName}}.</p>
+                <div ng-if="srcProfileImage.descryption != null">
+                    <p style="text-align: center; color: black; font-family: 'Copperplate Gothic Light'; font-size: 14px">
+                        {{srcProfileImage.descryption}}</p>
+                </div>
+                <img ng-src=/GET_IMAGE/{{srcProfileImage.foodId}}.jpg
+                     ng-click="houseClicked(srcProfileImage)" class="md-card-image" alt="Washed Out"
+                     style="position: relative;height: 200px; length: 200px; border-radius: 10px 10px 0 0;">
+                <div layout-align="right" style="font-size: 15px;font-family: 'Copperplate Gothic Light';">
+                    {{srcProfileImage.price}}
+                    <md-icon md-svg-icon="ils" style="height: 15px;width: 15px;"></md-icon>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
