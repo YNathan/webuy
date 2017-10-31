@@ -171,6 +171,9 @@ public class User {
     }
 
     public void loadPermitionsToView(ArrayList<House> houses) {
+        if (szUserId == null){
+            szUserId = "1";
+        }
         // Get current user id
         int nThisUserId = Integer.parseInt(szUserId);
 

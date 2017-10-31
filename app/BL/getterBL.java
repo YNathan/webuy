@@ -156,6 +156,7 @@ public class getterBL {
         User userToReturn = getterDB.getUser(nUserId);
         return userToReturn.toJson();
     }
+
     /***
      *
      * @param szUserName the name of the user
@@ -279,7 +280,7 @@ public class getterBL {
                     }
                     break;
                 case "Keytring":
-                        matchFoodToReturn.add(currentFoodEntity);
+                    matchFoodToReturn.add(currentFoodEntity);
                     break;
                 default:
                     if (currentFoodEntity.isBassari()) {
@@ -400,6 +401,38 @@ public class getterBL {
         return sbExistingFilesToReturn;
     }
 
+    public ArrayList<User> getUsers(String szUserName) {
+        ArrayList<User> usersToReturn = null;
+        ArrayList<User> lstToCheckIfIsManager = getterDB.getUsers();
+        Iterator<User> ltrUser = lstToCheckIfIsManager.iterator();
+
+        User currUser = null;
+        if (ltrUser.hasNext()) {
+            currUser = (User) ltrUser.next();
+        }
+        while (currUser != null) {
+
+            if ((currUser.getUsername().equals(szUserName)) && (currUser.getPermissionManager() == true)) {
+                // INFO
+                play.Logger.info("<BUSINESS_LOGIC> Get users");
+
+                usersToReturn = getterDB.getUsers();
+            }
+            if (ltrUser.hasNext()) {
+                currUser = ltrUser.next();
+            } else {
+                currUser = null;
+            }
+
+        }
+        ArrayList<House> houses = getterDB.getListOfHouse();
+        for (User currentUser : usersToReturn) {
+            currentUser.loadPermitionsToView(houses);
+        }
+        return usersToReturn;
+    }
+
+
     // Get Specific Picture
     public File getSpecificImages(String szFileName) {
         String szFullFilePath = System.getenv("WEBUY_PICTS") + "\\" + szFileName;
@@ -412,11 +445,21 @@ public class getterBL {
         ProductEntitiesToReturn = getterDB.getAllProducts();
         return ProductEntitiesToReturn;
     }
+
     public ArrayList<Product> getProductsByTag(String tag) {
         ArrayList<Product> ProductEntitiesToReturn = new ArrayList<>();
         ProductEntitiesToReturn = getterDB.getProductsByTag(tag);
         return ProductEntitiesToReturn;
     }
 
+    public Product getProductById(String szProductId) {
+        int nProductId = Integer.parseInt(szProductId);
+        Product productToReturn = new Product();
+        productToReturn = getterDB.getProductById(nProductId);
+        return productToReturn;
+    }
+    public ResaultSearch search(String szSearchString){
+
+    }
 
 }

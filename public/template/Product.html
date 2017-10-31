@@ -1,0 +1,12 @@
+<h3>product id : <var>{{productId}}</var></h3>
+<h3>product name : <var>{{product.productName}}</var></h3>
+<h3>company name : <var>{{product.companyName}}</var></h3>
+<h3>seller id : <var>{{product.sellerId}}</var></h3>
+<h3>min price : <var>{{product.minPrice}}</var></h3>
+<h3>max price : <var>{{product.maxPrice}}</var></h3>
+<h3>tags : <var>{{product.tags}}</var></h3>
+
+<img ng-src=/GET_IMAGE/{{product.productId}}.jpg
+     class="md-card-image" alt="Washed Out"
+     ng-click="goToProduct()"
+     style="height: 100px; length: 100px; border-radius: 10px 10px 0 0;">

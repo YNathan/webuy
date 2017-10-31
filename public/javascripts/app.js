@@ -26,7 +26,8 @@ app.config(function ($stateProvider, $urlRouterProvider, $mdIconProvider, $mdToa
         .state('welcome', {
             url: "/welcome",
             templateUrl: "template/Welcome.html",
-            controller: 'welcome'
+            controller: 'welcome',
+            params : { productId: -1, }
         })
         .state('Manager', {
             url: "/manager",
@@ -57,5 +58,10 @@ app.config(function ($stateProvider, $urlRouterProvider, $mdIconProvider, $mdToa
             url: "/Copyright",
             templateUrl: "template/Copyright.html",
             controller: 'Copyright'
+        })
+        .state('Product', {
+            url: "/Product",
+            templateUrl: "template/Product.html",
+            controller: 'Product'
         });
 });

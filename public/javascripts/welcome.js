@@ -31,6 +31,8 @@ app.controller('welcome', ['$scope', '$http', '$state', '$interval', '$mdDialog'
             });
 
     $scope.getProductsByTags = function (tagSelected) {
+        $scope.listOfProductEntitys = [];
+        $scope.listOfTags = [];
         // Get all products
         $http.get("/GET_PRODUCTS_BY_TAG/"+tagSelected)
             .then(function successCallback(response) {
@@ -53,7 +55,6 @@ app.controller('welcome', ['$scope', '$http', '$state', '$interval', '$mdDialog'
 
 
 
-    $scope.lala = "poulet roty";
    ShamayimFunctions.setIsLoggedCookie("false");
     // Language Section
 
@@ -94,82 +95,7 @@ app.controller('welcome', ['$scope', '$http', '$state', '$interval', '$mdDialog'
 
     // End Of Language Section
 
-    // Repas Section
-    $scope.foodProfilePathesImages = {
-        availableOptions: [],
-        selectedOption: {
-            id: '1',
-            imagesSource: 'default'
-        }
-    };
 
-
-    // Get Profile Images
-    function getFoodProfileImages(foodName) {
-        $http.get('/GET_FOOD/'+foodName)
-            .then(function successCallback(response) {
-                    $scope.foodProfilePathesImages.availableOptions = [];
-                    angular.forEach(response.data, function (value, key) {
-                        itemName = {
-                            id: key,
-                            imagesSource: value
-                        }
-                        $scope.foodProfilePathesImages.availableOptions.push(itemName.imagesSource);
-                    }, $scope.foodProfilePathesImages);
-
-                },
-                function error(response) {
-                    //showAlert("Your attention please", response.data, "cant load food");
-                });
-    }
-
-    // Get Profile Images
-    $scope.getKeytringFoodProfileImages = function() {
-        $http.get('/GET_FOOD/'+'Keytring')
-            .then(function successCallback(response) {
-                    $scope.foodProfilePathesImages.availableOptions = [];
-                    angular.forEach(response.data, function (value, key) {
-                        itemName = {
-                            id: key,
-                            imagesSource: value
-                        }
-                        $scope.foodProfilePathesImages.availableOptions.push(itemName.imagesSource);
-                    }, $scope.foodProfilePathesImages);
-
-                },
-                function error(response) {
-                //    showAlert("Your attention please", response.data, "cant load food");
-                });
-    }
-
-    $scope.Repas = {
-        availableOptions: [],
-        selectedOption: {
-            id: '1',
-            RepasHPB: 'default'
-        }
-    };
-
-    var tempArr = [];
-    itemName = {
-        id: 1,
-        RepasHPB: "Bessari"
-    }
-    tempArr.push(itemName);
-    $scope.Repas.availableOptions.push(itemName.RepasHPB);
-    itemName = {
-        id: 2,
-        RepasHPB: "Parve"
-    }
-    tempArr.push(itemName);
-    $scope.Repas.availableOptions.push(itemName.RepasHPB);
-    itemName = {
-        id: 3,
-        RepasHPB: "Halavi"
-    }
-    tempArr.push(itemName);
-
-    $scope.Repas.availableOptions.push(itemName.RepasHPB);
     function getLanguage(szLanguageName) {
         // Get information conserning the house
         $http.get("/GET_LANGUAGE/" + szLanguageName)
@@ -188,14 +114,6 @@ app.controller('welcome', ['$scope', '$http', '$state', '$interval', '$mdDialog'
 
 
    // getLanguage("עברית");
-
-    $scope.$watch('Repas.selectedOption', function (newVal, oldVal) {
-        if (newVal != oldVal) {
-            RepasName = newVal;
-            getFoodProfileImages(RepasName)
-
-        }
-    })
 
 
     $scope.setUpPage= function(){
@@ -231,8 +149,11 @@ app.controller('welcome', ['$scope', '$http', '$state', '$interval', '$mdDialog'
     $rootScope.goToHouse = function () {
         $state.go('House');
     }
-    $rootScope.goToHouse = function () {
-        $state.go('House');
+    $rootScope.goToProduct = function (productId) {
+        $state.get('welcome').params.productId = productId;
+        var a = $state.get('welcome').params.productId;
+        console.log(a);
+        $state.go('Product');
     }
     $rootScope.logout = function () {
         ShamayimFunctions.setIsLoggedCookie("false");

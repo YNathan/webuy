@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Iterator;
 import java.util.List;
 import java.time.*;
 import static play.mvc.Controller.request;
@@ -154,6 +155,33 @@ public class setter {
             return ok(webResponce.getReason());
         }
     }
+
+    /**
+     * update user into the system
+     *
+     * @return
+     * @throws Exception
+     */
+    public static Result updateUser() throws Exception {
+        webResponce = new WebResponce();
+        JsonNode json = request().body().asJson();
+        if (json == null) {
+            return badRequest("Expecting Json data");
+        } else {
+            User userToUpdate = new User();
+            jsonToUserEntity(json, userToUpdate);
+            Iterator<JsonNode> lsthousePermitedToViews = json.findPath("housePermitedToViews").elements();
+            System.out.println("Receive user for update : Receive User For Update: " + userToUpdate.toString());
+            webResponce = setterBL.updateUser(userToUpdate.getUserId(), userToUpdate.getUsername(), userToUpdate.getTelephone(), userToUpdate.getEmail(), userToUpdate.getPassword(), userToUpdate.convertBooleanToDataBaseFormatString(userToUpdate.getPermissionManager()), userToUpdate.convertBooleanToDataBaseFormatString(userToUpdate.getPermissionView()), lsthousePermitedToViews);
+            if (webResponce.getSuccessFailed() == ESuccessFailed.FAILED) {
+                System.out.println(webResponce.toString());
+                return badRequest(webResponce.toJson());
+            }
+            System.out.println("The User was Update correctly" + userToUpdate.toString());
+            return ok(webResponce.getReason());
+        }
+    }
+
 
     /**
      * add user into the system

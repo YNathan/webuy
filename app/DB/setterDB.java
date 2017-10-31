@@ -19,7 +19,7 @@ public class setterDB {
     private static Connection connect;
     private static ResultSet resultSet;
     private static PreparedStatement preparedStatement;
-    private static String TABLE_USERS_NAME = "shamayim.users";
+    private static String TABLE_USERS_NAME = "webuy.users";
     private static String TABLE_HOUSE_NAME = "shamayim.house";
     private static String TABLE_PERMITED_VIEW_NAME = "shamayim.permissions_view";
     private static String TABLE_FOOD_NAME = "folies.food";
@@ -197,8 +197,7 @@ public class setterDB {
 
             // String strConnection=
             // "Server=127.0.0.1;Port=3306;Database=shamayim;Uid=root;password=Ny7516399;";
-            connect = DriverManager.getConnection("jdbc:mysql://localhost/shamayim?user=" + DATA_BASE_USER_NAME
-                    + "&password=" + DATA_BASE_PASSWORD_NAME);
+            connect = DriverManager.getConnection("jdbc:mysql://localhost/webuy?user=root&password=sh123456");
 
             // PreparedStatements can use variables and are more efficient
             preparedStatement = connect.prepareStatement("insert into " + TABLE_USERS_NAME
@@ -266,8 +265,7 @@ public class setterDB {
 
             // String strConnection=
             // "Server=127.0.0.1;Port=3306;Database=shamayim;Uid=root;password=Ny7516399;";
-            connect = DriverManager.getConnection("jdbc:mysql://localhost/shamayim?user=" + DATA_BASE_USER_NAME
-                    + "&password=" + DATA_BASE_PASSWORD_NAME);
+            connect = DriverManager.getConnection("jdbc:mysql://localhost/webuy?user=root&password=sh123456");
 
             // PreparedStatements can use variables and are more efficient
             preparedStatement = connect.prepareStatement("update " + TABLE_USERS_NAME + " set user_name='" + userName + "',telephone='" + telephone + "',email='" + email + "',password='" + password + "',permission_manager=" + nPermissionManager + ",permission_view=" + nPermissionView + " where user_id=" + nUserId + ";");

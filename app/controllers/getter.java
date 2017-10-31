@@ -10,6 +10,7 @@ import play.mvc.Result;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -84,6 +85,14 @@ public class getter extends Controller {
         }
     }
 
+    public static Result getUsers(String szUserName) {
+        if (szUserName != null) {
+            return play.mvc.Results.ok(Json.toJson(getterBL.getUsers(szUserName)));
+        } else {
+            return play.mvc.Results
+                    .badRequest("Null pointer screw you! \nyou send your request with an empty user-name!");
+        }
+    }
 
     public static Result getUserInformation(String szUserName) {
         Logger.info("<GETTER> " + szUserName + " ask information on the user");
@@ -276,6 +285,8 @@ public class getter extends Controller {
      * @return
      */
     public static Result getAllProducts() {
+        LocalDateTime a = LocalDateTime.now();
+        System.out.println(a);
         System.out.println(new SimpleDateFormat("HH:mm:ss").format(Calendar.getInstance().getTime()) + " <GETTER>  in IP : " + request().remoteAddress() + " : Get all products");
         Logger.debug(new SimpleDateFormat("HH:mm:ss").format(Calendar.getInstance().getTime()) + " <GETTER>  in IP : " + request().remoteAddress() + " : Get all products");
         return ok(Json.toJson(getterBL.getAllProductsEntities()));
@@ -289,6 +300,19 @@ public class getter extends Controller {
         System.out.println(new SimpleDateFormat("HH:mm:ss").format(Calendar.getInstance().getTime()) + " <GETTER>  in IP : " + request().remoteAddress() + " : Get products by tag: " + tag);
         Logger.debug(new SimpleDateFormat("HH:mm:ss").format(Calendar.getInstance().getTime()) + " <GETTER>  in IP : " + request().remoteAddress() + " : Get products by tag: " + tag);
         return ok(Json.toJson(getterBL.getProductsByTag(tag)));
+    }
+
+    /***
+     * Get a all products from server
+     * @return
+     */
+    public static Result getProductById(String szProductId) {
+        System.out.println(new SimpleDateFormat("HH:mm:ss").format(Calendar.getInstance().getTime()) + " <GETTER>  in IP : " + request().remoteAddress() + " : Get product by id: " + szProductId);
+        Logger.debug(new SimpleDateFormat("HH:mm:ss").format(Calendar.getInstance().getTime()) + " <GETTER>  in IP : " + request().remoteAddress() + " : Get product by id: " + szProductId);
+        return ok(Json.toJson(getterBL.getProductById(szProductId)));
+    }
+    public static Result search(String szSearch){
+        return ok(Json.toJson(getterBL.search(szSearch)));
     }
 
 }
