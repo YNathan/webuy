@@ -1,5 +1,7 @@
 package Entity;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -66,7 +68,7 @@ public class ResaultSearch {
     }
 
     public void addToSeller(int nProductId, String szCompanyName) {
-        sellerId.put(nProductId,szCompanyName);
+        sellerId.put(nProductId, szCompanyName);
     }
 
 
@@ -77,5 +79,22 @@ public class ResaultSearch {
             System.out.println(pair.getKey() + " = " + pair.getValue());
             it.remove(); // avoids a ConcurrentModificationException
         }
+    }
+
+    public static void loopingAndAddingToNormalArray(HashMap hashMap, Method method) {
+        Iterator it = hashMap.entrySet().iterator();
+        while (it.hasNext()) {
+            HashMap.Entry pair = (HashMap.Entry) it.next();
+            try {
+                method.invoke(pair.getKey(),pair.getValue());
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            } catch (InvocationTargetException e) {
+                e.printStackTrace();
+            }
+            System.out.println(pair.getKey() + " = " + pair.getValue());
+            it.remove(); // avoids a ConcurrentModificationException
+        }
+
     }
 }

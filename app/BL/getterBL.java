@@ -458,8 +458,10 @@ public class getterBL {
         productToReturn = getterDB.getProductById(nProductId);
         return productToReturn;
     }
-    public ResaultSearch search(String szSearchString){
 
+    public ResaultSearch search(String szSearchString) {
+        ResaultSearch resaultSearch = new ResaultSearch();
+        return resaultSearch;
     }
 
 }
