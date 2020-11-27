@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html ng-app="MyApp" ng-strict-di>
+
+<head>
+    <title>my app</title>
+    <style>ul { padding-left: 0; } li { list-style: none; }</style>
+    <script data-require="angular.js@*" data-semver="1.3.7" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.7/angular.js"></script>
+    <script data-require="ui-router@*" data-semver="0.2.13" src="//rawgit.com/angular-ui/ui-router/0.2.13/release/angular-ui-router.js"></script>
+    <script>
+        document.write('<base href="'+ document.location.pathname +'" />')
+    </script>
+    <script src="script.js"></script>
+</head>
+
+<body>
+<ul>
+    <li><a ui-sref="home({veryLongParamHome:'Home--f8d218ae-d998-4aa4-94ee-f27144a21238'})">home</a>
+    <li><a ui-sref="parent({
+        veryLongParamParent:'Parent--2852f22c-dc85-41af-9064-d365bc4fc822'
+      })">parent</a>
+    <li><a ui-sref="parent.child({
+        veryLongParamParent:'Parent--0b2a585f-fcef-4462-b656-544e4575fca5',
+        veryLongParamChild:'Child--f8d218ae-d998-4aa4-94ee-f27144a61238'
+      })">parent.child</a>
+</ul>
+
+<div ui-view=""></div>
+
+<script type="text/ng-template" id="tpl.html">
+    <div ui-view>
+        <h3>current state name: <var>{{$state.current.name}}</var></h3>
+
+
+        <h5>params</h5>
+        <pre>{{$stateParams | json}}</pre>
+        <h5>state</h5>
+        <pre>{{$state.current | json}}</pre>
+
+    </div>
+</script>
+
+</body>
+
+</html>

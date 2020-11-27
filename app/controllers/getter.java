@@ -9,6 +9,7 @@ import play.mvc.Controller;
 import play.mvc.Result;
 
 import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.Calendar;
@@ -314,5 +315,18 @@ public class getter extends Controller {
     public static Result search(String szSearch){
         return ok(Json.toJson(getterBL.search(szSearch)));
     }
+
+
+    /***
+     * Get a all products from server
+     * @return
+     */
+    public static Result getAllTrips() throws IOException {
+        StatisticGet statisticGet = new StatisticGet();
+        System.out.println(new SimpleDateFormat("HH:mm:ss").format(Calendar.getInstance().getTime()) + " <GETTER>  in IP : " + request().remoteAddress() + " : Get All Trips");
+        Logger.debug(new SimpleDateFormat("HH:mm:ss").format(Calendar.getInstance().getTime()) + " <GETTER>  in IP : " + request().remoteAddress() + " : Get All Trips");
+        return ok(Json.toJson(statisticGet.getStatistics()));
+    }
+
 
 }
